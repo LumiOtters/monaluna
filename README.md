@@ -2,6 +2,8 @@
 
 用 **Next.js 15 + Tailwind CSS v4** 从零搭建的 Persona 5 Royal 风格个人网站。
 
+100%由DSH生成，我是小白正在学习中...之后会做出我的个人项目，敬请期待
+
 ## 快速开始
 
 ```bash
