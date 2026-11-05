@@ -228,6 +228,51 @@ h3 {
   }
 }
 
+/* ---- 首页动态背景相关 ---- */
+
+/* 放射速度线缓慢旋转（比 spin-slow 更慢，制造呼吸感） */
+@keyframes p5-bg-spin {
+  from {
+    transform: rotate(0deg) scale(1.5);
+  }
+  to {
+    transform: rotate(360deg) scale(1.5);
+  }
+}
+
+/* 反向旋转，用于第二层速度线，产生视差 */
+@keyframes p5-bg-spin-reverse {
+  from {
+    transform: rotate(360deg) scale(1.2);
+  }
+  to {
+    transform: rotate(0deg) scale(1.2);
+  }
+}
+
+/* 红色条纹带横向流动 */
+@keyframes p5-bg-slide {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 160px 0;
+  }
+}
+
+/* 背景脉冲光 */
+@keyframes p5-bg-pulse {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.06);
+  }
+}
+
 @utility animate-p5-rise {
   animation: p5-rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
@@ -242,6 +287,22 @@ h3 {
 
 @utility animate-p5-spin-slow {
   animation: p5-spin-slow 18s linear infinite;
+}
+
+@utility animate-p5-bg-spin {
+  animation: p5-bg-spin 60s linear infinite;
+}
+
+@utility animate-p5-bg-spin-reverse {
+  animation: p5-bg-spin-reverse 90s linear infinite;
+}
+
+@utility animate-p5-bg-slide {
+  animation: p5-bg-slide 6s linear infinite;
+}
+
+@utility animate-p5-bg-pulse {
+  animation: p5-bg-pulse 8s ease-in-out infinite;
 }
 
 /* 尊重用户的减弱动效偏好 */

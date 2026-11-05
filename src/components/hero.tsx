@@ -1,10 +1,11 @@
-﻿"use client";
+"use client";
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import clsx from "clsx";
 import { siteConfig } from "@/data/site";
 import { CollageText } from "@/components/collage-text";
+import { FloatingParticles } from "@/components/floating-particles";
 
 /**
  * 首页 Hero —— P5R 启动画面感
@@ -21,25 +22,49 @@ export function Hero() {
 
   return (
     <section className="relative flex min-h-[92vh] items-center overflow-hidden bg-p5-black">
-      {/* 背景：速度线 + 网点 */}
-      <div className="pointer-events-none absolute inset-0 opacity-[0.18] p5-speedlines" />
+      {/* ============ 动态背景层（从底到顶） ============ */}
+
+      {/* 1. 中心脉冲红光 */}
+      <div className="pointer-events-none absolute left-1/2 top-1/2 h-[80vh] w-[80vh] -translate-x-1/2 -translate-y-1/2 animate-p5-bg-pulse rounded-full bg-[radial-gradient(circle,rgba(230,0,18,0.22)_0%,transparent_70%)]" />
+
+      {/* 2. 放射速度线：层1 顺时针慢转 */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="absolute inset-0 animate-p5-bg-spin opacity-[0.13] p5-speedlines" />
+      </div>
+
+      {/* 3. 放射速度线：层2 逆时针慢转，形成视差 */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="absolute inset-0 animate-p5-bg-spin-reverse opacity-[0.08] p5-speedlines-red" />
+      </div>
+
+      {/* 4. 网格网点，轻微漂移 */}
       <div className="pointer-events-none absolute inset-0 opacity-30 p5-dots" />
 
-      {/* 斜向红色条纹带 —— 增强冲击力 */}
+      {/* 5. 斜向红色条纹带，横向流动 */}
       <div
-        className="pointer-events-none absolute -left-10 top-[16%] h-24 w-[130%] -rotate-6 bg-p5-red/10 [background-image:repeating-linear-gradient(90deg,transparent_0_40px,rgba(230,0,18,0.4)_40px_60px)]"
+        className="pointer-events-none absolute -left-10 top-[16%] h-24 w-[130%] -rotate-6 bg-p5-red/10 animate-p5-bg-slide [background-image:repeating-linear-gradient(90deg,transparent_0_40px,rgba(230,0,18,0.4)_40px_60px)]"
         aria-hidden="true"
       />
       <div
-        className="pointer-events-none absolute -left-10 bottom-[20%] h-16 w-[130%] rotate-3 bg-p5-red/10 [background-image:repeating-linear-gradient(90deg,transparent_0_28px,rgba(230,0,18,0.28)_28px_44px)]"
+        className="pointer-events-none absolute -left-10 bottom-[20%] h-16 w-[130%] rotate-3 bg-p5-red/10 animate-p5-bg-slide [animation-direction:reverse] [background-image:repeating-linear-gradient(90deg,transparent_0_28px,rgba(230,0,18,0.28)_28px_44px)]"
         aria-hidden="true"
       />
 
-      {/* 巨大的旋转红圈 */}
+      {/* 6. 漂浮碎片粒子（canvas） */}
+      <FloatingParticles />
+
+      {/* 7. 巨大的旋转红圈 */}
       <div className="pointer-events-none absolute -right-40 top-1/2 hidden -translate-y-1/2 md:block">
         <div className="relative h-[36rem] w-[36rem] animate-p5-spin-slow rounded-full border-[3px] border-p5-red/40">
           <div className="absolute inset-8 rounded-full border-2 border-dashed border-p5-red/25" />
           <div className="absolute inset-20 rounded-full border border-p5-red/20" />
+        </div>
+      </div>
+
+      {/* 8. 左下角的第二个小圈，反向转 */}
+      <div className="pointer-events-none absolute -left-32 bottom-0 hidden lg:block">
+        <div className="relative h-64 w-64 animate-p5-bg-spin-reverse rounded-full border-2 border-dashed border-p5-red/20">
+          <div className="absolute inset-10 rounded-full border border-p5-red/15" />
         </div>
       </div>
 
